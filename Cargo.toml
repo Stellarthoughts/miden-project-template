@@ -1,11 +1,13 @@
 [workspace]
 members = [
-    "contracts/counter-account",
-    "contracts/increment-note",
     "integration"
 ]
+exclude = [
+    "contracts/",
+]
 resolver = "2"
+
+[workspace.package]
 edition = "2021"
 
 [workspace.dependencies]
-miden = { version = "0.8" }
