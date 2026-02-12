@@ -5,7 +5,7 @@ use integration::helpers::{
 
 use anyhow::{Context, Result};
 use miden_client::{
-    account::StorageMap,
+    account::{StorageMap, StorageSlot, StorageSlotName},
     transaction::{OutputNote, TransactionRequestBuilder},
     Felt, Word,
 };
@@ -35,11 +35,16 @@ async fn main() -> Result<()> {
     // Create the counter account with initial storage and no-auth auth component
     let count_storage_key = Word::from([Felt::new(0), Felt::new(0), Felt::new(0), Felt::new(1)]);
     let initial_count = Word::from([Felt::new(0), Felt::new(0), Felt::new(0), Felt::new(0)]);
+    // The slot name is constructed as
+    // `miden::component::[to_underscore(Cargo.toml:package.metadata.component.package)]::[field_name]`
+    let counter_storage_slot =
+        StorageSlotName::new("miden::component::miden_counter_account::count_map").unwrap();
+    let storage_slots = vec![StorageSlot::with_map(
+        counter_storage_slot.clone(),
+        StorageMap::with_entries([(count_storage_key, initial_count)]).unwrap(),
+    )];
     let counter_cfg = AccountCreationConfig {
-        storage_slots: vec![miden_client::account::StorageSlot::Map(
-            StorageMap::with_entries([(count_storage_key, initial_count)])
-                .context("Failed to create storage map with initial counter value")?,
-        )],
+        storage_slots,
         ..Default::default()
     };
 
@@ -88,7 +93,7 @@ async fn main() -> Result<()> {
     );
 
     let consume_note_request = TransactionRequestBuilder::new()
-        .unauthenticated_input_notes([(counter_note.clone(), None)])
+        .input_notes([(counter_note.clone(), None)])
         .build()
         .context("Failed to build consume note transaction request")?;
 
