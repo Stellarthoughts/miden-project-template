@@ -53,7 +53,7 @@ impl MyComponent {
 crate-type = ["cdylib"]
 
 [dependencies]
-miden = { version = "0.9" }
+miden = { version = "0.10" }  # check Cargo.toml for current version
 
 [package.metadata.component]
 package = "miden:my-component"
@@ -94,7 +94,7 @@ impl MyNote {
 crate-type = ["cdylib"]
 
 [dependencies]
-miden = { version = "0.9" }
+miden = { version = "0.10" }  # check Cargo.toml for current version
 
 [package.metadata.component]
 package = "miden:my-note"
@@ -251,5 +251,5 @@ use alloc::vec::Vec;
 - [ ] `crate-type = ["cdylib"]` in Cargo.toml
 - [ ] Correct `project-kind` in `[package.metadata.miden]`
 - [ ] Cross-component deps in both `[package.metadata.miden.dependencies]` and `[package.metadata.component.target.dependencies]`
-- [ ] Felt arithmetic validated before subtraction (see miden-pitfalls skill)
-- [ ] Felt comparisons use `.as_u64()` (see miden-pitfalls skill)
+- [ ] Felt arithmetic validated before subtraction (see rust-sdk-pitfalls skill)
+- [ ] Felt comparisons use `.as_u64()` (see rust-sdk-pitfalls skill)

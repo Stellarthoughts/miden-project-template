@@ -1,5 +1,5 @@
 ---
-name: miden-testing-patterns
+name: rust-sdk-testing-patterns
 description: Guide to testing Miden smart contracts with MockChain. Covers test setup, contract building, account/note creation, transaction execution, storage verification, faucet setup, and output note verification. Use when writing, editing, or debugging Miden integration tests.
 ---
 
@@ -175,7 +175,7 @@ let tx_context = mock_chain
     .build()?;
 
 let executed = tx_context.execute().await?;
-account.apply_delta(&executed.account_delta())?;
+account.apply_delta(executed.account_delta())?;
 mock_chain.add_pending_executed_transaction(&executed)?;
 mock_chain.prove_next_block()?;
 ```
@@ -220,7 +220,7 @@ async fn multi_step_test() -> anyhow::Result<()> {
         .tx_script(init_script)
         .build()?;
     let executed_init = init_tx_context.execute().await?;
-    account.apply_delta(&executed_init.account_delta())?;
+    account.apply_delta(executed_init.account_delta())?;
     mock_chain.add_pending_executed_transaction(&executed_init)?;
     mock_chain.prove_next_block()?;
 
@@ -229,7 +229,7 @@ async fn multi_step_test() -> anyhow::Result<()> {
         .build_tx_context(account.id(), &[note.id()], &[])?
         .build()?;
     let executed = tx_context.execute().await?;
-    account.apply_delta(&executed.account_delta())?;
+    account.apply_delta(executed.account_delta())?;
     mock_chain.add_pending_executed_transaction(&executed)?;
     mock_chain.prove_next_block()?;
 

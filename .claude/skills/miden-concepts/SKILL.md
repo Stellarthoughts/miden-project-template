@@ -67,7 +67,7 @@ A transaction is a **single-account state transition** with 4 phases:
 - **Felt**: Field element in the Goldilocks prime field (p = 2^64 - 2^32 + 1). The fundamental data unit.
 - **Word**: Array of 4 Felts (32 bytes). Used for cryptographic hashes, storage keys, account IDs.
 
-**WARNING**: Felt arithmetic is **modular**. Subtraction wraps around the prime. Always validate with `.as_u64()` before subtracting. See the miden-pitfalls skill for details.
+**WARNING**: Felt arithmetic is **modular**. Subtraction wraps around the prime. Always validate with `.as_u64()` before subtracting. See the rust-sdk-pitfalls skill for details.
 
 ## Standard Note Patterns
 
@@ -85,6 +85,8 @@ A transaction is a **single-account state transition** with 4 phases:
 | `BasicFungibleFaucet` | Mint/burn fungible tokens |
 | `NoAuth` | No authentication (for testing) |
 | `AuthFalcon512Rpo` | Production signature authentication |
+
+**Note**: Standard components (BasicWallet, BasicFungibleFaucet) are currently MASM-only and not callable from Rust SDK. See [compiler#936](https://github.com/0xMiden/compiler/issues/936). Use them by composing accounts at creation time, not by calling their functions from Rust contract code.
 
 ## Development Model
 
