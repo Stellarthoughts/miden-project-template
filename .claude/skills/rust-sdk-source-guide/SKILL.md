@@ -71,17 +71,19 @@ Clone these repos alongside your project for reference. Claude will explore them
 
 ```bash
 # Required: contains standard note types and account components
-git clone --depth 1 https://github.com/0xMiden/miden-base.git ../miden-base
+git clone --depth 1 --branch main https://github.com/0xMiden/miden-base.git ../miden-base
 
 # Required: contains SDK, compiler, and 12 working examples
-git clone --depth 1 https://github.com/0xMiden/compiler.git ../compiler
+git clone --depth 1 --branch main https://github.com/0xMiden/compiler.git ../compiler
 
 # Required: contains client API for deployment and chain interaction
-git clone --depth 1 https://github.com/0xMiden/miden-client.git ../miden-client
+git clone --depth 1 --branch main https://github.com/0xMiden/miden-client.git ../miden-client
 
 # Recommended: complete working banking app with advanced patterns
-git clone https://github.com/keinberger/miden-bank.git ../miden-bank
+git clone --branch main https://github.com/keinberger/miden-bank.git ../miden-bank
 ```
+
+**Note**: These commands clone the stable `main` branch. Only use `--branch next` if the user explicitly requests the experimental/upcoming version of the compiler or source repos.
 
 ### `compiler/` — The Rust-to-MASM Compiler
 

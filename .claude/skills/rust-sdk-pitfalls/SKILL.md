@@ -72,15 +72,11 @@ Storage slot names follow a strict pattern. Getting it wrong returns zero silent
 
 ## P5: No-std Environment
 
-**Severity**: Medium — causes compilation errors
+**Severity**: Medium -- causes compilation errors
 
 All contract code must be `#![no_std]`. Forgetting this or using std types causes build failures.
 
-**Required at the top of every contract file:**
-```rust
-#![no_std]
-#![feature(alloc_error_handler)]
-```
+**Required at the top of every contract file:** See any contract in [contracts/](../../../contracts/) for the correct pattern (`#![no_std]` + `#![feature(alloc_error_handler)]`).
 
 **For heap allocation (Vec, String, Box):**
 ```rust
@@ -117,6 +113,8 @@ let key = Word::from([
 **Severity**: Low-Medium — breaks after miden-standards updates
 
 Creating P2ID output notes requires the MAST root digest of the P2ID script. This is typically hardcoded as a constant.
+
+For any note that is being created within the compiler code, the MAST root digest is needed. Below you find the example of a P2ID note
 
 ```rust
 fn p2id_note_root() -> Digest {

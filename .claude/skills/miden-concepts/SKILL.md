@@ -77,17 +77,6 @@ A transaction is a **single-account state transition** with 4 phases:
 | **P2IDE** | P2ID with expiration | Adds block-height timelock; sender can reclaim after expiry |
 | **SWAP** | Atomic asset exchange | Note offers asset A, requests asset B; consumer provides B |
 
-## Standard Components (miden-standards)
-
-| Component | Purpose |
-|-----------|---------|
-| `BasicWallet` | Standard wallet: `receive_asset()`, `move_asset_to_note()` |
-| `BasicFungibleFaucet` | Mint/burn fungible tokens |
-| `NoAuth` | No authentication (for testing) |
-| `AuthFalcon512Rpo` | Production signature authentication |
-
-**Note**: Standard components (BasicWallet, BasicFungibleFaucet) are currently MASM-only and not callable from Rust SDK. See [compiler#936](https://github.com/0xMiden/compiler/issues/936). Use them by composing accounts at creation time, not by calling their functions from Rust contract code.
-
 ## Development Model
 
 ```

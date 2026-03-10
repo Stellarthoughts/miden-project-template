@@ -129,5 +129,3 @@ This template includes resources for AI-assisted development:
 - `CLAUDE.md` — Project context loaded automatically by Claude Code
 - `.claude/skills/` — On-demand skill files for Miden SDK patterns, pitfalls, testing, and source exploration
 - `.claude/hooks/build-contracts.sh` — Automatic build verification after contract edits
-
-Skills are also available for other AI tools (Cursor, Codex) via [agent-skills](https://github.com/0xMiden/agent-skills).
