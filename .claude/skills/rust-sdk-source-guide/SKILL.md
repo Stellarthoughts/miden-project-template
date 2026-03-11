@@ -100,11 +100,13 @@ Contains the SDK that powers `#[component]`, `#[note]`, and `#[tx_script]` macro
 Contains the protocol specification, standard components, and standard note types.
 
 - **`crates/miden-standards/`** — Standard note types (P2ID, P2IDE, SWAP, BURN, MINT) and standard account components (BasicWallet, BasicFungibleFaucet, authentication components). Explore to understand note flow patterns and data layouts.
+- **`crates/miden-protocol/asm/kernels/transaction/`** — The MASM transaction kernel. Every Rust SDK function (e.g., `native_account::add_asset`, `output_note::create`, `faucet::mint`) maps to a procedure defined here. Start with `api.masm` to find the procedure signature and stack contract, then read the implementation in `lib/` (e.g., `lib/output_note.masm`, `lib/account.masm`, `lib/epilogue.masm`). Useful for understanding exactly what happens under the hood -- for example, whether a function touches the vault, what the conservation check compares, or how note assets are tracked.
+- **`crates/miden-tx/`** — Rust execution engine (executor, prover, host). Orchestrates transaction execution but rarely needed for understanding contract behavior. Explore only if debugging execution infrastructure or host-level behavior.
 - **`crates/miden-testing/`** — MockChain implementation internals. Explore when you need to understand testing infrastructure beyond what the testing-patterns skill covers.
 
-**Note**: Standard components (BasicWallet, etc.) are MASM-only and not callable from Rust SDK (see [compiler#936](https://github.com/0xMiden/compiler/issues/936)). Explore miden-standards to understand note flows and data layouts, not for finding callable Rust APIs. Do NOT explore `crates/miden-tx/` (transaction kernel) — it is MASM internals exposed via SDK bindings.
+**Note**: Standard components (BasicWallet, etc.) are MASM-only and not callable from Rust SDK (see [compiler#936](https://github.com/0xMiden/compiler/issues/936)). Explore miden-standards to understand note flows and data layouts, not for finding callable Rust APIs.
 
-**Explore when**: Understanding note flows, finding how P2ID/SWAP/faucet patterns work, understanding data layouts for standard components.
+**Explore when**: Understanding note flows, P2ID/SWAP/faucet data layouts, or what SDK functions actually do under the hood (via the kernel MASM).
 
 ### `miden-client/` — Client Library
 
@@ -140,6 +142,7 @@ A complete banking application built with the Rust SDK. Demonstrates advanced pa
 | Swap notes | `miden-base/` standards (data layouts) | SwapNote data layout, tag construction, payback flow |
 | Multi-step tests | `miden-bank/` integration tests | Init → operate → verify flow, output note verification |
 | Client deployment | `miden-client/` | TransactionRequestBuilder, sync, submit patterns |
+| SDK function internals | `miden-base/` kernel (`crates/miden-protocol/asm/kernels/transaction/`) | `api.masm` for procedure signatures, `lib/*.masm` for implementations |
 
 ---
 
