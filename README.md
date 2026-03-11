@@ -122,3 +122,10 @@ To add a new crate to the workspace:
 2. Then add the crate path (e.g., `my-new-crate`) to the `[workspace].members` section of your `Cargo.toml`.
 
 **Note:** Avoid adding new crates as subdirectories under `contracts/` or `integration/`, unless they are intended to be contract crates or part of integration specifically. Keeping new crates at the root makes the project easier to understand and maintain.
+
+## AI Developer Experience
+
+This template includes resources for AI-assisted development:
+- `CLAUDE.md` — Project context loaded automatically by Claude Code
+- `.claude/skills/` — On-demand skill files for Miden SDK patterns, pitfalls, testing, and source exploration
+- `.claude/hooks/build-contracts.sh` — Automatic build verification after contract edits
