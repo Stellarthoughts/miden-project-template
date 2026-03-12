@@ -23,6 +23,9 @@ node_modules/
 # Ignore database and keystore files
 store.sqlite3
 keystore/
+local-store.sqlite3
+local-keystore/
+local-node-data/
 
 # Ignore contract build artifacts
 contracts/**/target/
